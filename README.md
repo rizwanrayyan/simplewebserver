@@ -15,26 +15,62 @@ Serving the HTML pages.
 Testing the webserver
 
 ## PROGRAM:
+----
+from http.server import HTTPServer, BaseHTTPRequestHandler
+content = """
 <!DOCTYPE html>
 <html>
-<head>
-<title>MY SIMPLE WEBSERVER </title>
-</head>
+<title>Top Software industries</title>
 <body>
-<h1 align="center">TOP 5 REVENUE GENERATING COMPANY</h1>
-<li align="center">
-<ol>Microsoft</ol>
-<ol>Oracle</ol>
-<ol>IBM</ol>
-<ol>Adobe</ol>
-<ol>salesforce</ol>
-</li>
+<table border="2" cellspacing="10" cellpadding="6" align="center">
+<caption>Top 5 Revenue Generating Software companies </caption>
+<tr>
+<th>s.no</th>
+<th>companies</th>
+<th>revenue</th>
+</tr>
+<tr>
+<th>1</th>
+<th>Microsoft</th>
+<th>65 Billion </th>
+</tr>
+<th>2</th>
+<th>Oracle</th>
+<th>29.6 Billion </th>
+</tr>
+<tr>
+<th>3</th>
+<th>IBM</th>
+<th>29.1 Billion</th>
+</tr>
+<tr>
+<th>4</th>
+<th>SAP</th>
+<th>6.4 Billion</th>
+</tr>
+<tr>
+<th>5</th>
+<th>Syemtec</th>
+<th>5.6 BIllion</th>
+</tr>
+</table>
 </body>
 </html>
-
+"""
+class myhandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("request received")
+        self.send_response(200)
+        self.send_header('content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+server_address = ('',80)
+httpd = HTTPServer(server_address,myhandler)
+print("my webserver is running...")
+httpd.serve_forever()
+----
 ## OUTPUT:
-![image](https://github.com/rizwanrayyan/simplewebserver/assets/121215820/3ec43fe6-52dd-4194-ae24-59c521d1c4f3)
+![Screenshot 2023-11-01 000103](https://github.com/rizwanrayyan/simplewebserver/assets/121215820/94180a08-e0ba-4966-8aac-dcfbd42979be)
 
-![Alt text](<Screenshot 2023-11-01 000103.png>)
 ## RESULT:
 The program for implementing simple webserver is executed successfully.
